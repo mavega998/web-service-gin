@@ -20,5 +20,6 @@ func main() {
 	router.GET("/albums/:id", controllers.FindAlbumById)
 	router.POST("/albums", controllers.CreateAlbum)
 	router.PATCH("/albums/:id", controllers.UpdateAlbum)
+	router.DELETE("/albums/:id", controllers.DeleteAlbum)
 	router.Run()
 }

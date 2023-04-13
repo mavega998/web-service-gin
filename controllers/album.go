@@ -56,3 +56,15 @@ func UpdateAlbum(c *gin.Context) {
 	models.DB.Model(&album).Updates(albumUpd)
 	c.JSON(http.StatusOK, gin.H{"data": album})
 }
+
+func DeleteAlbum(c *gin.Context) {
+	id := c.Param("id")
+	var album models.Album
+	if err := models.DB.Where("id = ?", id).First(&album).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Album not found!"})
+		return
+	}
+
+	models.DB.Delete(&album)
+	c.JSON(http.StatusOK, gin.H{"data": true})
+}
